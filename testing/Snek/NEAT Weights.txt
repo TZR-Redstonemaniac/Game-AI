@@ -1,0 +1,5 @@
+Snake Weights:
+    Distance from the apple?
+    Colliding with itself?
+    Able to access 80% of free tiles?
+    Is blocking off squares?
