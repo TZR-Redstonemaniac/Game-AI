@@ -58,7 +58,6 @@ def main():
         global upLastPress
         global downLastPress
 
-        global rightLastPress
         global running
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
