@@ -26,8 +26,8 @@ class MainGame:
 
 
 if __name__ == "__main__":
-    width, height = 700, 900
-    window = pygame.display.set_mode((width, height))
+    width, height = 500, 700
+    window = pygame.display.set_mode((width, height + 200))
 
     game = MainGame(window, width, height)
 
