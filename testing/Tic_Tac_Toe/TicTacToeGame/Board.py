@@ -174,72 +174,63 @@ class Board:
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "A2" and not self.a2o:
             self.a2x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "A3" and not self.a3o:
             self.a3x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B1" and not self.b1o:
             self.b1x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B2" and not self.b2o:
             self.b2x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B3" and not self.b3o:
             self.b3x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C1" and not self.c1o:
             self.c1x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C2" and not self.c2o:
             self.c2x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C3" and not self.c3o:
             self.c3x = True
             self.x = False
             self.o = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
     def DrawO(self, pos):
         if pos == "A1" and not self.a1x:
@@ -247,72 +238,63 @@ class Board:
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "A2" and not self.a2x:
             self.a2o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "A3" and not self.a3x:
             self.a3o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B1" and not self.b1x:
             self.b1o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B2" and not self.b2x:
             self.b2o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "B3" and not self.b3x:
             self.b3o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C1" and not self.c1x:
             self.c1o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C2" and not self.c2x:
             self.c2o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
         if pos == "C3" and not self.c3x:
             self.c3o = True
             self.o = False
             self.x = True
             self.count += 1
-        else:
-            print("This position is not valid")
+        
 
     def Reset(self):
         self.a1x = False

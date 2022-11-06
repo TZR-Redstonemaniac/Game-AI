@@ -1,3 +1,4 @@
+from string import ascii_lowercase as alc
 from .Click import Click
 from .Logic import Logic
 from .Score import Score
@@ -7,16 +8,8 @@ pygame.init()
 
 
 class GameInfo:
-    def __init__(self, a1, a2, a3, b1, b2, b3, c1, c2, c3, x_score, o_score):
-        self.a1 = a1
-        self.a2 = a2
-        self.a3 = a3
-        self.b1 = b1
-        self.b2 = b2
-        self.b3 = b3
-        self.c1 = c1
-        self.c2 = c2
-        self.c3 = c3
+    def __init__(self, _list, x_score, o_score):
+        self.input_list = _list
         self.x_score = x_score
         self.o_score = o_score
 
@@ -30,15 +23,25 @@ class Game:
         self.x_score = 0
         self.o_score = 0
 
-        self.a1 = 0
-        self.b1 = 0
-        self.c1 = 0
-        self.a2 = 0
-        self.b2 = 0
-        self.c2 = 0
-        self.a3 = 0
-        self.b3 = 0
-        self.c3 = 0
+        self.positions = {
+            "a1" : False,
+            "b1" : False,
+            "c1" : False,
+            "a2" : False,
+            "b2" : False,
+            "c2" : False,
+            "a3" : False,
+            "b3" : False,
+            "c3" : False
+        }
+
+
+
+        self.input_list = []
+
+        for i in range(0, 9):
+            self.input_list.append(False)
+
 
         self.logic = Logic(self.window, self.window_height, self.window_width)
         self.click = Click(self.window_width, self.window_height)
@@ -61,56 +64,67 @@ class Game:
                 self.o_score += 1
                 self.Reset()
 
+        count = -1
+        for i in alc:
+            if i == "d" or i == "D":
+                break
+
+            for j in range(1, 4):
+                count += 1
+                if self.positions[f"{i}{j}"]:
+                    self.input_list[count] = True
+                else:
+                    self.input_list[count] = False
+
         if self.logic.board.count == 9:
             self.Reset()
 
         if self.logic.board.a1x or self.logic.board.a1o:
-            self.a1 = 1
+            self.positions["a1"] = True
         else:
-            self.a1 = 0
+            self.positions["a1"] = False
 
         if self.logic.board.b1x or self.logic.board.b1o:
-            self.b1 = 1
+            self.positions["b1"] = True
         else:
-            self.b1 = 0
+            self.positions["b1"] = False
 
         if self.logic.board.c1x or self.logic.board.c1o:
-            self.c1 = 1
+            self.positions["c1"] = True
         else:
-            self.c1 = 0
+            self.positions["c1"] = False
 
         if self.logic.board.a2x or self.logic.board.a2o:
-            self.a2 = 1
+            self.positions["a2"] = True
         else:
-            self.a2 = 0
+            self.positions["a2"] = False
 
-        if self.logic.board.c2x or self.logic.board.b2o:
-            self.b2 = 1
+        if self.logic.board.b2x or self.logic.board.b2o:
+            self.positions["b2"] = True
         else:
-            self.c2 = 0
+            self.positions["b2"] = False
 
         if self.logic.board.c2x or self.logic.board.c2o:
-            self.c2 = 1
+            self.positions["c2"] = True
         else:
-            self.c2 = 0
+            self.positions["c2"] = False
 
         if self.logic.board.a3x or self.logic.board.a3o:
-            self.a3 = 1
+            self.positions["a3"] = True
         else:
-            self.a3 = 0
+            self.positions["a3"] = False
 
         if self.logic.board.b3x or self.logic.board.b3o:
-            self.b3 = 1
+            self.positions["b3"] = True
         else:
-            self.b3 = 0
+            self.positions["b3"] = False
 
         if self.logic.board.c3x or self.logic.board.c3o:
-            self.c3 = 1
+            self.positions["c3"] = True
         else:
-            self.c3 = 0
+            self.positions["c3"] = False
 
-        game_info = GameInfo(self.a1, self.a2, self.a3, self.b1, self.b2, self.b3, self.c1, self.c2, self.c3,
-                             self.x_score, self.o_score)
+        game_info = GameInfo(self.input_list, self.x_score, self.o_score)
 
         return game_info
 

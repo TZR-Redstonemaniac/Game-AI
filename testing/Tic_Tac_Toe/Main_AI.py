@@ -38,73 +38,69 @@ class MainGame:
                 if event.type == pygame.QUIT:
                     quit()
 
-            output1 = net1.activate((self.game.a1, self.game.b1, self.game.c1, self.game.a2, self.game.b2, self.game.c2,
-                                     self.game.a3, self.game.b3, self.game.c3, self.game.x_score, self.game.o_score))
+            output1 = net1.activate((self.game.input_list, self.game.x_score, self.game.o_score))
 
-            decision1 = output1.index(max(output1))
+            decision1 = round(output1[0], 2)
 
             match decision1:
-                case 0:
+                case _ if decision1 <= -.88:
                     self.game.CheckClick("A1", True)
 
-                case 1:
+                case _ if -.88 <= decision1 <= -.66:
                     self.game.CheckClick("B1", True)
 
-                case 2:
+                case _ if -.66 <= decision1 <= -.44:
                     self.game.CheckClick("C1", True)
 
-                case 3:
+                case _ if -.44 <= decision1 <= -.22:
                     self.game.CheckClick("A2", True)
 
-                case 4:
+                case _ if -.22 <= decision1 <= 0:
                     self.game.CheckClick("B2", True)
 
-                case 5:
+                case _ if 0 <= decision1 <= .22:
                     self.game.CheckClick("C2", True)
 
-                case 6:
+                case _ if .22 <= decision1 <= .44:
                     self.game.CheckClick("A3", True)
 
-                case 7:
+                case _ if .44 <= decision1 <= .66:
                     self.game.CheckClick("B3", True)
 
-                case 8:
+                case _ if .66 <= decision1:
                     self.game.CheckClick("C3", True)
 
-            output2 = net2.activate((self.game.a1, self.game.b1, self.game.c1, self.game.a2, self.game.b2, self.game.c2,
-                                     self.game.a3, self.game.b3, self.game.c3, self.game.x_score, self.game.o_score))
+            output2 = net2.activate((self.game.input_list, self.game.x_score, self.game.o_score))
 
-            decision2 = output2.index(max(output2))
+            decision2 = round(output2[0], 2)
 
             match decision2:
-                case 0:
+                case _ if decision2 <= -.88:
                     self.game.CheckClick("A1", True)
 
-                case 1:
+                case _ if -.88 <= decision2 <= -.66:
                     self.game.CheckClick("B1", True)
 
-                case 2:
+                case _ if -.66 <= decision2 <= -.44:
                     self.game.CheckClick("C1", True)
 
-                case 3:
+                case _ if -.44 <= decision2 <= -.22:
                     self.game.CheckClick("A2", True)
 
-                case 4:
+                case _ if -.22 <= decision2 <= 0:
                     self.game.CheckClick("B2", True)
 
-                case 5:
+                case _ if 0 <= decision2 <= .22:
                     self.game.CheckClick("C2", True)
 
-                case 6:
+                case _ if .22 <= decision2 <= .44:
                     self.game.CheckClick("A3", True)
 
-                case 7:
+                case _ if .44 <= decision2 <= .66:
                     self.game.CheckClick("B3", True)
 
-                case 8:
+                case _ if .66 <= decision2:
                     self.game.CheckClick("C3", True)
-
-            print(output1, output2)
 
             game_info = self.game.GameLoop()
             pygame.display.update()
