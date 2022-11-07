@@ -1,3 +1,5 @@
+import math
+
 from SnekGame import Game
 
 import pygame
@@ -116,8 +118,10 @@ class SnakeGame:
                 if event.type == pygame.QUIT:
                     return quit()
 
+
+
             output = net.activate((abs(self.snake.x[0] - self.apple.x), abs(self.snake.y[0] - self.apple.y),
-                                   self.snake.front, self.snake.left, self.snake.right))
+                                   self.angle(self.snake.x[0] - self.apple.x, self.snake.y[0] - self.apple.y)))
 
             decision = output.index(max(output))
 
@@ -228,29 +232,49 @@ class SnakeGame:
             self.game.draw()
             pygame.display.update()
 
-            if abs(self.snake.x[0] - self.apple.x) < tempx or abs(self.snake.y[0] - self.apple.y) < tempy:
-                self.calculate_fitness(genome, game_info, True, False)
-                tempx = abs(self.snake.x[0] - self.apple.x)
-                tempy = abs(self.snake.y[0] - self.apple.y)
-            elif abs(self.snake.x[0] - self.apple.x) > tempx or abs(self.snake.y[0] - self.apple.y) > tempy:
-                self.calculate_fitness(genome, game_info, False, False)
-                tempx = abs(self.snake.x[0] - self.apple.x)
-                tempy = abs(self.snake.y[0] - self.apple.y)
-            elif self.game.score >= 1:
-                self.calculate_fitness(genome, game_info, True, True)
+
+            if self.game.score >= 1:
+                self.calculate_fitness(genome, game_info)
                 print("next")
                 break
 
-    def calculate_fitness(self, genome, game_info, add, done):
-        if done:
-            genome.fitness += game_info.score * 1000
-            genome.fitness -= self.game.death * 100
-        if add:
-            genome.fitness += abs(self.snake.x[0] - self.apple.x)
-            genome.fitness += abs(self.snake.y[0] - self.apple.y)
+    def calculate_fitness(self, genome, game_info):
+        genome.fitness += game_info.score * 1000
+        genome.fitness -= self.game.death * 100
+
+    def angle(self, xdistance, ydistance):
+        x = ""
+        y = ""
+
+        angle = 0
+
+        if xdistance < 0:
+            x = "+"
         else:
-            genome.fitness -= abs(self.snake.x[0] - self.apple.x)
-            genome.fitness -= abs(self.snake.y[0] - self.apple.y)
+            x = "-"
+
+        if ydistance < 0:
+            y = "+"
+        else:
+            y = "-"
+
+        xd = abs(xdistance)
+        yd = abs(ydistance)
+
+        if y == "+" and x == "+":
+            angle = math.degrees(math.atan(yd/xd)) + 90
+
+        if y == "-" and x == "+":
+            angle = 90 - math.degrees(math.atan(yd/xd))
+
+        if y == "+" and x == "-":
+            angle = math.degrees(math.atan(yd/xd)) + 180
+
+        if y == "-" and x == "-":
+            angle = math.degrees(math.atan(yd/xd)) + 270
+
+        return round(angle, 2)
+
 
     def check_surrounding(self, dir):
         match dir:
