@@ -1,6 +1,6 @@
 [NEAT]
 fitness_criterion     = mean
-fitness_threshold     = 5000
+fitness_threshold     = 500
 pop_size              = 50
 reset_on_extinction   = False
 
@@ -15,13 +15,13 @@ survival_threshold = 0.2
 
 [DefaultGenome]
 # node activation options
-activation_default      = sigmoid
-activation_mutate_rate  = 1.0
-activation_options      = sigmoid
+activation_default      = relu
+activation_mutate_rate  = 0.5
+activation_options      = relu
 
 # node aggregation options
 aggregation_default     = sum
-aggregation_mutate_rate = 0.0
+aggregation_mutate_rate = 0.5
 aggregation_options     = sum
 
 # node bias options

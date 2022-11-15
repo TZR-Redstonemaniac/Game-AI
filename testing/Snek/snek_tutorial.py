@@ -239,8 +239,8 @@ class SnakeGame:
                 break
 
     def calculate_fitness(self, genome, game_info):
-        genome.fitness += game_info.score * 1000
-        genome.fitness -= self.game.death * 100
+        genome.fitness += game_info.score * 100
+        genome.fitness -= self.game.death * 10
 
     def angle(self, xdistance, ydistance):
         x = ""
@@ -260,6 +260,19 @@ class SnakeGame:
 
         xd = abs(xdistance)
         yd = abs(ydistance)
+
+        if yd == 0 and x == "+":
+            angle = 90
+            return round(angle, 2)
+        elif yd == 0 and x == "-":
+            angle = 270
+            return round(angle, 2)
+        elif xd == 0 and y == "+":
+            angle = 180
+            return round(angle, 2)
+        elif xd == 0 and y == "-":
+            angle = 0
+            return round(angle, 2)
 
         if y == "+" and x == "+":
             angle = math.degrees(math.atan(yd/xd)) + 90
